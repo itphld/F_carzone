@@ -43,52 +43,52 @@
         </div>
         <!-- Search box 3 start -->
         <div class="search-box-4 sb-8">
-            <form action="#" method="">
+            <form action="{%url 'search'%}" method="">
                 <div class="form-group">
                     <input type="text" name="keyword" placeholder="Search by name" class="form-control">
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-brand">
+                    <select class="form-control search-fields" name="model">
                         <option selected="true" disabled="disabled">Brand</option>
-                        <option>Audi</option>
-                        <option>BMW</option>
-                        <option>Honda</option>
-                        <option>Nissan</option>
+
+                        {%  for model in search_model %}
+                        <option value={{model}}>{{model}}</option>
+                        {%endfor%}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-make">
-                        <option selected="true" disabled="disabled">Model</option>
-                        <option>BMW</option>
-                        <option>Honda</option>
-                        <option>Lamborghini Huracán</option>
-                        <option>Sports Car</option>
+                    <select class="form-control search-fields" name="f">
+                        <option selected="true" disabled="disabled">Fuel Type</option>
+                        {%for f in search_fuel%}
+                        <option value={{f}}>{{f}}</option>
+
+                        {%endfor%}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-location">
+                    <select class="form-control search-fields" name="city">
                         <option selected="true" disabled="disabled">Location</option>
-                        <option>United States</option>
-                        <option>United Kingdom</option>
+                        {%for city in search_city%}
+                        <option value={{city}}>{{city}}</option>
+                        {%endfor%}
+
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-year">
+                    <select class="form-control search-fields" name="y">
                         <option selected="true" disabled="disabled">Year</option>
-                        <option>2016</option>
-                        <option>2017</option>
-                        <option>2018</option>
-                        <option>2019</option>
+                        {%for y in search_year%}
+                        <option value={{y}}>{{y}}</option>
+                      {%endfor%}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="select-type">
-                        <option selected="true" disabled="disabled">Select Type Of Car</option>
-                        <option>Sedan</option>
-                        <option>Sports</option>
-                        <option>Hatchback</option>
-                        <option>Pickup Truck</option>
-                        <option>SUV</option>
+                    <select class="form-control search-fields" name="ing">
+                        <option selected="true" disabled="disabled">Engine Type</option>
+                        {%for ing in search_engin%}
+                        <option value={{ing}}>{{ing}}</option>
+                        {%endfor%}
+
                     </select>
                 </div>
                 <div class="range-slider clearfix">
@@ -171,7 +171,7 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="car-details.html">{{car.car_title}}</a>
+                                <a href="{%url 'car_detail' car.id%}">{{car.car_title}}</a>
                             </h1>
                             <div class="location">
                                 <a href="car-details.html">
@@ -272,7 +272,7 @@
                     </div>
                     <div class="detail">
                         <h1 class="title">
-                            <a href="car-details.html">{{car.car_title}}</a>
+                            <a href="{%url 'car_detail' car.id%}">{{car.car_title}}</a>
                         </h1>
                         <div class="location">
                             <a href="car-details.html">
@@ -385,8 +385,8 @@
 <!-- Full Page Search -->
 <div id="full-page-search">
     <button type="button" class="close">×</button>
-    <form action="https://storage.googleapis.com/theme-vessel/carhouse/index.html#" class="search-header">
-        <input type="search" value="" placeholder="type keyword(s) here. Eg: audi, benz etc" />
+    <form action="{% url 'search' %}" class="search-header">
+        <input type="search" value="" placeholder="type keyword(s) here. Eg: audi, benz etc" name='keyword' />
         <button type="submit" class="btn btn-sm button-theme">Search</button>
     </form>
 </div>
